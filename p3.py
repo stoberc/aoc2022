@@ -1,58 +1,43 @@
-import pdb
-from collections import defaultdict
-from aoc_utils import *
-import re
+#import pdb
 
 FNAME = "in3.txt"
-    
+
+# split the line in half
 def parse_line(line):
-    l = len(line) // 2
-    return line[:l], line[l:]
-    #return [int(i) for i in re.findall('-?\d+', line)] # grab all the numbers
+    i = len(line) // 2
+    return line[:i], line[i:]
 
-def common(a, b):
-    x = set(a).intersection(set(b))
-    assert len(x) == 1
-    return list(x)[0]
-    
-#chunks = [chunk.splitlines() for chunk in open(FNAME).read().split('\n\n')]
-#data = [[parse_line(line) for line in chunk] for chunk in chunks]
-
-data = [parse_line(line) for line in open(FNAME).read().splitlines()] # in chunks[0]]
-
-#data = [int(i) for i in open(FNAME).read().split(',')]
-
-d = [common(*i) for i in data]
-
+# find the score associated with a particular letter
+# a = 1, b = 2, ..., z = 26, A = 27, B = 28, ..., Z = 52
 def score(letter):
     if ord('a') <= ord(letter) <= ord('z'):
         return ord(letter) - ord('a') + 1
-    else:
-        return ord(letter) - ord('A') + 1 + 26
+    return ord(letter) - ord('A') + 27
 
-print("Part 1:", sum([score(i) for i in d]))
+# find the (lone) common character betwen two strings
+def score_row(a, b):
+    x = set(a).intersection(set(b))
+    assert len(x) == 1
+    return score(x.pop())
+    
+# process the input and compute Part 1 score
+data = [parse_line(line) for line in open(FNAME).read().splitlines()]
+print("Part 1:", sum([score_row(*i) for i in data]))
 
-data = [a + b for a, b in data]
+# rejoin each line from the input for Part 2
+data = [i + j for i, j in data]
 
-data2 = []
-while len(data) > 0:
-    x = []
-    x.append(data.pop(0))
-    x.append(data.pop(0))
-    x.append(data.pop(0))
-    data2.append(x)
+# split the input into three-row chunks
+data = [data[i:i+3] for i in range(0, len(data), 3)]
+
+# score a group by finding the common character and scoring it
+def score_group(a, b, c):
+    x = set(a).intersection(set(b)).intersection(set(c))
+    assert len(x) == 1
+    return score(x.pop())
+
+# do this for each group in the input for Part 2
+print("Part 2:", sum([score_group(*i) for i in data]))
 
 #pdb.set_trace()
-
-def score_group(a, b, c):
-    a = set(a)
-    b = set(b)
-    c = set(c)
-    x = a.intersection(b).intersection(c)
-    assert len(x) == 1
-    return score(list(x)[0])
-
-print("Part 2:", sum([score_group(*i) for i in data2]))
-
-pdb.set_trace()
     
