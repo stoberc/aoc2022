@@ -10,7 +10,7 @@ def parse_line(line):
 # find the score associated with a particular letter
 # a = 1, b = 2, ..., z = 26, A = 27, B = 28, ..., Z = 52
 def score(letter):
-    if ord('a') <= ord(letter) <= ord('z'):
+    if letter.islower():
         return ord(letter) - ord('a') + 1
     return ord(letter) - ord('A') + 27
 
