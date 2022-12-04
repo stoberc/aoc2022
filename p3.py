@@ -16,7 +16,7 @@ def score(letter):
 
 # find the (lone) common character betwen two strings
 def score_row(a, b):
-    x = set(a).intersection(set(b))
+    x = set(a) & set(b)
     assert len(x) == 1
     return score(x.pop())
     
@@ -32,7 +32,7 @@ data = [data[i:i+3] for i in range(0, len(data), 3)]
 
 # score a group by finding the common character and scoring it
 def score_group(a, b, c):
-    x = set(a).intersection(set(b)).intersection(set(c))
+    x = set(a) & set(b) & set(c)
     assert len(x) == 1
     return score(x.pop())
 
