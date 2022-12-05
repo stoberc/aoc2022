@@ -13,7 +13,9 @@ chunks = [chunk.splitlines() for chunk in open(FNAME).read().split('\n\n')]
 #indices = [initial_config[-1].index(str(i)) for i in range(1, number_of_stacks + 1)]
 
 # realized it's way faster to just manually enter these than to code a parser
-stacks = [list('NCRTMZP'), list('DNTSBZ'), list('MHQRFCTG'), list('GRZ'), list('ZNRH'), list('FHSWPZLD'), list('WDZRCGM'), list('SJFLHWZQ'), list('SQPWN')]
+stacks = ['NCRTMZP', 'DNTSBZ', 'MHQRFCTG', 'GRZ', 'ZNRH', 'FHSWPZLD', 'WDZRCGM', 'SJFLHWZQ', 'SQPWN']
+stacks = [list(i) for i in stacks]
+stacksbk = [i[:] for i in stacks]
 
 commands = [parse_line(line) for line in chunks[1]]
 
@@ -28,7 +30,7 @@ for command in commands:
 print("Part 1:", ''.join([i[-1] for i in stacks]))
 
 # reset
-stacks = [list('NCRTMZP'), list('DNTSBZ'), list('MHQRFCTG'), list('GRZ'), list('ZNRH'), list('FHSWPZLD'), list('WDZRCGM'), list('SJFLHWZQ'), list('SQPWN')]
+stacks = stacksbk
 
 # Part 2 rules: move a whole block in one shot
 def process_command2(count, source, dest):
