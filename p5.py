@@ -3,19 +3,24 @@ import re
 
 FNAME = "in5.txt"
     
-def parse_line(line):
-    return [int(i) for i in re.findall('\d+', line)] # grab all the numbers
-
 chunks = [chunk.splitlines() for chunk in open(FNAME).read().split('\n\n')]
 
-#initial_config = chunks[0]
-#number_of_stacks = len(initial_config[-1].split())
-#indices = [initial_config[-1].index(str(i)) for i in range(1, number_of_stacks + 1)]
+# parse the initial configuration of the stacks
+initial_config = chunks[0]
+number_of_stacks = len(initial_config[-1].split())
+assert number_of_stacks < 10 # otherwise the spacing becomes inconsistent
+stacks = [[row[i] for row in chunks[0][:-1]] for i in range(1, 4 * number_of_stacks, 4)]
+stacks = [list(reversed(''.join(i).strip())) for i in stacks]
 
 # realized it's way faster to just manually enter these than to code a parser
-stacks = ['NCRTMZP', 'DNTSBZ', 'MHQRFCTG', 'GRZ', 'ZNRH', 'FHSWPZLD', 'WDZRCGM', 'SJFLHWZQ', 'SQPWN']
-stacks = [list(i) for i in stacks]
-stacksbk = [i[:] for i in stacks]
+# leaving for quick reference, even though automatic parsing has now been implemented
+#stacks = ['NCRTMZP', 'DNTSBZ', 'MHQRFCTG', 'GRZ', 'ZNRH', 'FHSWPZLD', 'WDZRCGM', 'SJFLHWZQ', 'SQPWN']
+#stacks = [list(i) for i in stacks]
+
+stacksbk = [i[:] for i in stacks] # backup for Part 2
+
+def parse_line(line):
+    return [int(i) for i in re.findall('\d+', line)] # grab all the numbers
 
 commands = [parse_line(line) for line in chunks[1]]
 
