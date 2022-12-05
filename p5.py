@@ -1,4 +1,3 @@
-#import pdb
 import re
 
 FNAME = "in5.txt"
@@ -19,6 +18,7 @@ stacks = [list(reversed(''.join(i).strip())) for i in stacks]
 
 stacksbk = [i[:] for i in stacks] # backup for Part 2
 
+# extract the three key numbers from a command
 def parse_line(line):
     return [int(i) for i in re.findall('\d+', line)] # grab all the numbers
 
@@ -46,6 +46,4 @@ for command in commands:
     process_command2(*command)
  
 print("Part 2:", ''.join([i[-1] for i in stacks]))
-
-#pdb.set_trace()
     
