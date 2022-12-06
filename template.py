@@ -18,4 +18,3 @@ data = [parse_line(line) for line in open(FNAME).read().splitlines()] # in chunk
 
 
 pdb.set_trace()
-    
