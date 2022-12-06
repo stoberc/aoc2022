@@ -46,4 +46,3 @@ for command in commands:
     process_command2(*command)
  
 print("Part 2:", ''.join([i[-1] for i in stacks]))
-    
