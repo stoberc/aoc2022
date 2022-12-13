@@ -47,8 +47,8 @@ monkeysbk = copy.deepcopy(monkeys) # save initial state for quick reset for Part
 # Part 1
 ruleset = 1 # which part are we one, Part 1 or Part 2?
 for _ in range(20):
-    for i in range(len(monkeys)):
-        monkeys[i].round()
+    for m in monkeys:
+        m.round()
 
 counts = [m.handlecount for m in monkeys]
 counts.sort()
@@ -60,8 +60,8 @@ all_divisors_lcm = math.prod([m.divisor for m in monkeys])
 ruleset = 2
 
 for _ in range(10000):
-    for i in range(len(monkeys)):
-        monkeys[i].round()    
+    for m in monkeys:
+        m.round()
 
 counts = [m.handlecount for m in monkeys]
 counts.sort()
