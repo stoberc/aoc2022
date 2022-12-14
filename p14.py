@@ -27,8 +27,6 @@ points = set(points)
 # lower limit beyond which we know sand will fall forever
 maxy = max(y for x, y in points)
 
-source = 500, 0
-
 # try to add one unit of sand
 # returns True if successful, or False if it would fall forever
 def add_one_sand():
