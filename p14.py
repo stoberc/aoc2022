@@ -24,11 +24,10 @@ for line in open(FNAME).read().splitlines():
 # also removes all the duplicated end vertices from each segment
 points = set(points) 
 
-# lower limit beyond which we know sand will fall forever
-maxy = max(y for x, y in points)
-
 # where the floor is placed for Part 2
-floory = maxy + 2
+# doubles as marginally suboptimal lower limit beyond which 
+# we know sand will fall forever in Part 1
+floory = max(y for x, y in points) + 2
 
 sand_counter = 0 # keep track of how many units of sand have settled
 
