@@ -27,15 +27,18 @@ points = set(points)
 # lower limit beyond which we know sand will fall forever
 maxy = max(y for x, y in points)
 
+# where the floor is placed for Part 2
+floory = maxy + 2
+
 sand_counter = 0 # keep track of how many units of sand have settled
 
 # try to add one unit of sand
 # returns True if successful, or False if it would fall forever
 def add_one_sand():
     global sand_counter
-    sandx, sandy = 500, 0
+    sandx, sandy = 500, 0 # all sand originates here
     
-    while sandy < maxy:
+    while sandy < floory and (500, 0) not in points:
         if (sandx, sandy + 1) not in points:
             sandy += 1
         elif (sandx - 1, sandy + 1) not in points:
@@ -53,28 +56,9 @@ while add_one_sand():
 
 print("Part 1:", sand_counter)
 
-floory = maxy + 2
-
 for x in range(500 - 2 * floory, 500 + 2 * floory):
     points.add((x, floory))
-    
-def add_one_sand():
-    global sand_counter
-    sandx, sandy = 500, 0
-    
-    while (500, 0) not in points:
-        if (sandx, sandy + 1) not in points:
-            sandy += 1
-        elif (sandx - 1, sandy + 1) not in points:
-            sandx, sandy = sandx - 1, sandy + 1
-        elif (sandx + 1, sandy + 1) not in points:
-            sandx, sandy = sandx + 1, sandy + 1
-        else:
-            points.add((sandx, sandy))
-            sand_counter += 1
-            return True
-    return False
-    
+        
 while add_one_sand():
     pass
 
