@@ -20,7 +20,11 @@ def parse_line(line):
 for line in open(FNAME).read().splitlines():
     parse_line(line)
 
-points = set(points) # convert to a set to reduce amortized lookup time
+# convert to a set to reduce amortized lookup time
+# also removes all the duplicated end vertices from each segment
+points = set(points) 
+
+# lower limit beyond which we know sand will fall forever
 maxy = max(y for x, y in points)
 
 source = 500, 0
