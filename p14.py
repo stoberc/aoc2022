@@ -56,7 +56,8 @@ while add_one_sand():
 
 print("Part 1:", sand_counter)
 
-for x in range(500 - 2 * floory, 500 + 2 * floory):
+# insert the floor for Part 2
+for x in range(500 - floory - 1, 500 + floory + 1):
     points.add((x, floory))
         
 while add_one_sand():
