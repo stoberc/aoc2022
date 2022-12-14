@@ -33,12 +33,13 @@ floory = maxy + 2
 sand_counter = 0 # keep track of how many units of sand have settled
 
 # try to add one unit of sand
-# returns True if successful, or False if it would fall forever
+# returns True if successful, or False if it would fall forever (Part 1)
+# or if it would clog the source (Part 2)
 def add_one_sand():
     global sand_counter
     sandx, sandy = 500, 0 # all sand originates here
     
-    while sandy < floory and (500, 0) not in points:
+    while sandy < floory:
         if (sandx, sandy + 1) not in points:
             sandy += 1
         elif (sandx - 1, sandy + 1) not in points:
@@ -48,6 +49,8 @@ def add_one_sand():
         else:
             points.add((sandx, sandy))
             sand_counter += 1
+            if sandy == 0:
+                return False
             return True
     return False
     
