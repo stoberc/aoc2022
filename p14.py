@@ -10,17 +10,12 @@ def parse_line(line):
         ex, ey = [int(i) for i in end.split(',')]
         assert sx == ex or sy == ey
         if sx == ex:
-            dx = 0
-            dy = 1 if sy < ey else -1
+            for y in range(min(sy, ey), max(sy, ey) + 1):
+                points.append((sx, y))
         else:
             assert sy == ey
-            dy = 0
-            dx = 1 if sx < ex else -1
-        points.append((sx, sy))
-        while sx != ex or sy != ey:
-            sx += dx
-            sy += dy
-            points.append((sx, sy))
+            for x in range(min(sx, ex), max(sx, ex) + 1):
+                points.append((x, sy))
         
 for line in open(FNAME).read().splitlines():
     parse_line(line)
