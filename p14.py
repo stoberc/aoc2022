@@ -3,9 +3,9 @@ FNAME = "in14.txt"
 points = [] # just keep a list all points that are occupied by anything
 
 def parse_line(line):
-    line = line.split(' -> ')
-    for i in range(len(line) - 1):
-        start, end = line[i], line[i + 1]
+    vertices = line.split(' -> ')
+    for i in range(len(vertices) - 1):
+        start, end = vertices[i], vertices[i + 1]
         sx, sy = [int(i) for i in start.split(',')]
         ex, ey = [int(i) for i in end.split(',')]
         assert sx == ex or sy == ey
